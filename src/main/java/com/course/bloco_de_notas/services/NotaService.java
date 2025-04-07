@@ -29,4 +29,16 @@ public class NotaService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public Nota update(Long id, Nota obj) {
+        Nota entity = repository.getReferenceById(id);
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(Nota entity, Nota obj) {
+        entity.setNomeNota(obj.getNomeNota());
+        entity.setConteudo(obj.getConteudo());
+        entity.setStatus(obj.getStatus());
+    }
 }

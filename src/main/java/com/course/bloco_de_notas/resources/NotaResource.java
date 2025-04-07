@@ -40,4 +40,10 @@ public class NotaResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Nota> update(@PathVariable Long id, @RequestBody Nota obj) {
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }
