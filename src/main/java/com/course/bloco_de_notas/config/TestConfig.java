@@ -1,6 +1,7 @@
 package com.course.bloco_de_notas.config;
 
 import com.course.bloco_de_notas.entities.Nota;
+import com.course.bloco_de_notas.enums.Status;
 import com.course.bloco_de_notas.repositories.NotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +16,7 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Nota nota1 = new Nota(null, "Um dia", "O dia", 1);
+        Nota nota1 = new Nota(null, "Um dia", "O dia", Status.TERMINADO);
 
         notaRepository.save(nota1);
     }

@@ -1,5 +1,6 @@
 package com.course.bloco_de_notas.entities;
 
+import com.course.bloco_de_notas.enums.Status;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,11 +19,11 @@ public class Nota implements Serializable {
 
     public Nota() {}
 
-    public Nota(Long id, String nomeNota, String conteudo, Integer status) {
+    public Nota(Long id, String nomeNota, String conteudo, Status status) {
         this.id = id;
         NomeNota = nomeNota;
         Conteudo = conteudo;
-        this.status = status;
+        setStatus(status);
     }
 
     public Long getId() {
@@ -49,12 +50,14 @@ public class Nota implements Serializable {
         Conteudo = conteudo;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Status getStatus() {
+        return Status.valueOf(status);
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatus(Status status) {
+       if (status != null) {
+           this.status = status.getCode();
+       }
     }
 
     @Override
