@@ -25,4 +25,8 @@ public class NotaService {
     public Nota insert(Nota obj) {
         return repository.save(obj);
     }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
