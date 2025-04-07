@@ -21,4 +21,8 @@ public class NotaService {
         Optional<Nota> obj = repository.findById(id);
         return obj.get();
     }
+
+    public Nota insert(Nota obj) {
+        return repository.save(obj);
+    }
 }
