@@ -2,6 +2,7 @@ package com.course.bloco_de_notas.services;
 
 import com.course.bloco_de_notas.entities.Nota;
 import com.course.bloco_de_notas.repositories.NotaRepository;
+import com.course.bloco_de_notas.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class NotaService {
 
     public Nota findById(Long id) {
         Optional<Nota> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Nota insert(Nota obj) {
