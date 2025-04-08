@@ -4,6 +4,7 @@ import com.course.bloco_de_notas.entities.Nota;
 import com.course.bloco_de_notas.repositories.NotaRepository;
 import com.course.bloco_de_notas.services.exceptions.DatabaseException;
 import com.course.bloco_de_notas.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,9 +44,14 @@ public class NotaService {
     }
 
     public Nota update(Long id, Nota obj) {
-        Nota entity = repository.getReferenceById(id);
-        updateData(entity, obj);
-        return repository.save(entity);
+        try {
+            Nota entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Nota entity, Nota obj) {
